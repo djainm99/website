@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>💜 Yay!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --purple: #a855f7;
+      --purple-dark: #7c3aed;
+      --text: #1f1f1f;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #1e1533 0%, #2d1f47 100%);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      overflow: hidden;
+    }
+
+    .confetti-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      opacity: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 500px;
+      animation: fade-up 0.8s ease-out;
+    }
+
+    @keyframes fade-up {
+      from { 
+        opacity: 0; 
+        transform: translateY(30px); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0); 
+      }
+    }
+
+    .emoji {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      animation: bounce 1s ease infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .title {
+      font-size: 3rem;
+      font-weight: 600;
+      color: #fbbf24;
+      margin-bottom: 1.5rem;
+    }
+
+    .message {
+      font-size: 1.4rem;
+      line-height: 1.8;
+      color: #fef3e2;
+      margin-bottom: 2rem;
+    }
+
+    .letter {
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 8px;
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      text-align: left;
+      animation: fade-up 0.8s ease-out 0.3s both;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    }
+
+    .letter p {
+      font-size: 1.15rem;
+      line-height: 1.9;
+      color: #1f1f1f;
+      margin-bottom: 1rem;
+    }
+
+    .letter .signature {
+      text-align: right;
+      font-style: italic;
+      color: #7c3aed;
+      margin-top: 1.5rem;
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="confetti-container" id="confetti"></div>
+
+  <div class="container">
+    <div class="emoji">💜</div>
+    <h1 class="title">You said yes!</h1>
+    <p class="message">You just made me the happiest person in the world.</p>
+
+    <div class="letter">
+      <p>
+        You make every day brighter just by being you. 
+        I'm so grateful to have you in my life.
+      </p>
+      <p>
+        Here's to us, to love, and to all the adventures ahead.
+      </p>
+      <p class="signature">— Forever yours 💜</p>
+    </div>
+  </div>
+
+  <script>
+    function create_confetti() {
+      let container = document.getElementById('confetti');
+      let colors = ['#a855f7', '#c084fc', '#e879f9', '#fb7185', '#fbbf24', '#f472b6', '#818cf8'];
+
+      for (let i = 0; i < 150; i++) {
+        let confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        
+        let size = Math.random() * 10 + 5;
+        confetti.style.width = `${size}px`;
+        confetti.style.height = `${size}px`;
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.left = `${Math.random() * 100}%`;
+        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+        
+        let duration = Math.random() * 3 + 2;
+        let delay = Math.random() * 2;
+        
+        confetti.style.animation = `fall ${duration}s ease-out ${delay}s forwards`;
+        container.appendChild(confetti);
+      }
+    }
+
+    let style = document.createElement('style');
+    style.textContent = `
+      @keyframes fall {
+        0% {
+          transform: translateY(-100px) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(100vh) rotate(720deg);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+
+    create_confetti();
+
+    setInterval(create_confetti, 5000);
+  </script>
+</body>
+</html>
