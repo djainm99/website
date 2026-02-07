@@ -56,6 +56,13 @@
       animation: fade-up 0.8s ease-out;
     }
 
+    .celebration-card {
+      background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 3rem 2.5rem;
+    }
+
     @keyframes fade-up {
       from { 
         opacity: 0; 
@@ -67,52 +74,67 @@
       }
     }
 
-    .emoji {
-      font-size: 4rem;
+    .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      color: #a855f7;
+      text-transform: uppercase;
+      letter-spacing: 3px;
       margin-bottom: 1.5rem;
-      animation: bounce 1s ease infinite;
+      padding: 0.4rem 1rem;
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 20px;
     }
 
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
+    .gif-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .celebration-gif {
+      width: 180px;
+      height: auto;
+      border-radius: 12px;
     }
 
     .title {
-      font-size: 3rem;
+      font-size: 2.2rem;
       font-weight: 600;
-      color: #fbbf24;
-      margin-bottom: 1.5rem;
+      color: #ffffff;
+      margin-bottom: 1rem;
     }
 
     .message {
-      font-size: 1.4rem;
-      line-height: 1.8;
-      color: #fef3e2;
-      margin-bottom: 2rem;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #9ca3af;
+      margin-bottom: 0;
     }
 
     .letter {
+      margin-top: 1.5rem;
       padding: 2rem;
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 8px;
-      border: 1px solid rgba(251, 191, 36, 0.3);
+      background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
       text-align: left;
       animation: fade-up 0.8s ease-out 0.3s both;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
     }
 
     .letter p {
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       line-height: 1.9;
-      color: #1f1f1f;
+      color: #d1d5db;
       margin-bottom: 1rem;
     }
 
     .letter .signature {
       text-align: right;
       font-style: italic;
-      color: #7c3aed;
+      color: #a855f7;
       margin-top: 1.5rem;
       margin-bottom: 0;
     }
@@ -122,19 +144,25 @@
   <div class="confetti-container" id="confetti"></div>
 
   <div class="container">
-    <div class="emoji">💜</div>
-    <h1 class="title">You said yes!</h1>
-    <p class="message">You just made me the happiest person in the world.</p>
+    <div class="celebration-card">
+      <span class="tag">You said yes</span>
+      <div class="gif-container">
+        <img class="celebration-gif" src="https://media1.tenor.com/m/VkCTiuLf13YAAAAd/she-said-yes-brooklyn-nine-nine.gif" alt="She said yes!">
+        <img class="celebration-gif" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExM250dWJ5ZjdodWg4cWtja3Q2NWF5cmVtYTVjbTN0aGd0eTJ4ZWFoYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/5VzBNaOoVMnBvM5qrB/giphy.gif" alt="Celebration">
+      </div>
+      <h1 class="title">Thank you, Chinku</h1>
+      <p class="message">You just made me the happiest person in the world.</p>
+    </div>
 
     <div class="letter">
       <p>
-        You make every day brighter just by being you. 
-        I'm so grateful to have you in my life.
+        Thank you for accepting my Valentine's proposal and being there for me even with everything I put you through.
+        I am really really happy to spend this year's Valentine's Day with you in California.
       </p>
       <p>
         Here's to us, to love, and to all the adventures ahead.
       </p>
-      <p class="signature">— Forever yours 💜</p>
+      <p class="signature">— yours truely Meh</p>
     </div>
   </div>
 
