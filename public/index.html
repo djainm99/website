@@ -7,6 +7,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+  (function() {
+    emailjs.init({
+      publicKey: "Qd19h7HdPVzbXTJIJ",
+    });
+  })();
+</script>
+
   <style>
     * {
       margin: 0;
@@ -55,6 +64,84 @@
       height: 12px;
       background: linear-gradient(90deg, #d4a574, #e8c39e, #d4a574);
       box-shadow: 0 2px 10px rgba(212, 165, 116, 0.3);
+    }
+
+    .hint-section {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 50;
+    }
+
+    .hint-btn {
+      background: rgba(30, 20, 50, 0.9);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      padding: 0.6rem 1.2rem;
+      border-radius: 25px;
+      color: #fbbf24;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .hint-btn:hover {
+      background: rgba(40, 30, 60, 0.95);
+      border-color: rgba(251, 191, 36, 0.5);
+      transform: scale(1.05);
+    }
+
+    .hint-btn.active {
+      border-color: #fbbf24;
+    }
+
+    .hint-box {
+      position: absolute;
+      top: 50px;
+      right: 0;
+      background: rgba(30, 20, 50, 0.95);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      padding: 1.25rem;
+      border-radius: 12px;
+      width: 250px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+      opacity: 0;
+      transform: translateY(-10px) scale(0.95);
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    .hint-box.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .hint-label {
+      font-size: 0.75rem;
+      color: #fbbf24;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(251, 191, 36, 0.2);
+    }
+
+    .hint-text {
+      font-size: 0.95rem;
+      color: #e2e0e7;
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    .hint-text .hint-keyword {
+      color: #fbbf24;
+      font-weight: 600;
+      font-style: normal;
     }
 
     .hint-bar {
@@ -445,13 +532,13 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(ellipse at center, rgba(45, 31, 71, 0.97) 0%, rgba(15, 10, 30, 0.99) 100%);
+      background: #0f0a1a;
       display: flex;
       justify-content: center;
       align-items: center;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.5s ease;
+      transition: opacity 0.6s ease;
       z-index: 100;
     }
 
@@ -462,38 +549,86 @@
 
     .question-content {
       text-align: center;
-      padding: 2rem;
-      transform: scale(0.8);
-      transition: transform 0.5s ease;
+      padding: 3rem 2rem;
+      max-width: 550px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease 0.2s;
     }
 
     .question-overlay.show .question-content {
-      transform: scale(1);
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    .reveal-emoji {
-      font-size: 5rem;
-      margin-bottom: 1rem;
-      animation: bounce 1s ease infinite;
+    .reveal-card {
+      background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 3rem 2.5rem;
+      backdrop-filter: blur(10px);
     }
 
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
+    .reveal-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      color: #a855f7;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 1.5rem;
+      padding: 0.4rem 1rem;
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 20px;
+    }
+
+    .reveal-congrats {
+      font-size: 2.2rem;
+      color: #ffffff;
+      margin-bottom: 0.75rem;
+      font-weight: 600;
     }
 
     .reveal-message {
-      font-size: 1.4rem;
+      font-size: 1.1rem;
+      color: #9ca3af;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    .reveal-message .reveal-name {
       color: #fbbf24;
-      margin-bottom: 1rem;
-      font-style: italic;
+    }
+
+    .reveal-divider {
+      width: 40px;
+      height: 3px;
+      background: #a855f7;
+      margin: 0 auto 2.5rem;
+      border-radius: 2px;
     }
 
     .reveal-question {
-      font-size: 2.8rem;
-      font-weight: 600;
+      font-size: 1.8rem;
+      font-weight: 400;
       color: #fef3e2;
       margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+
+    .btn-yes {
+      background: #a855f7;
+      color: white;
+      padding: 1rem 3rem;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 20px rgba(168, 85, 247, 0.3);
+      transition: all 0.2s ease;
+      margin-left: -200px;
+    }
+
+    .btn-yes:hover {
+      background: #9333ea;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(168, 85, 247, 0.4);
     }
 
     .btn {
@@ -544,6 +679,125 @@
       display: none !important;
     }
 
+    .welcome-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse at center, #1e1533 0%, #0f0a1e 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 200;
+      transition: opacity 0.5s ease;
+    }
+
+    .welcome-overlay::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(251, 191, 36, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .welcome-overlay.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .welcome-popup {
+      text-align: center;
+      padding: 3rem 2rem;
+      max-width: 450px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .welcome-sparkles {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      opacity: 0.8;
+      letter-spacing: 1rem;
+      animation: sparkle-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes sparkle-pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    .welcome-greeting {
+      font-size: 1.1rem;
+      color: #c4b5fd;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin-bottom: 0.5rem;
+    }
+
+    .welcome-name {
+      font-size: 3.5rem;
+      color: #fbbf24;
+      margin-bottom: 2rem;
+      font-weight: 600;
+      text-shadow: 0 0 40px rgba(251, 191, 36, 0.3);
+    }
+
+    .welcome-divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #a855f7, transparent);
+      margin: 0 auto 2rem;
+    }
+
+    .welcome-text {
+      font-size: 1.3rem;
+      color: #fef3e2;
+      line-height: 1.9;
+      margin-bottom: 2.5rem;
+    }
+
+    .welcome-text .highlight {
+      color: #fbbf24;
+      font-style: italic;
+    }
+
+    .btn-start {
+      background: linear-gradient(145deg, #a855f7, #7c3aed);
+      color: white;
+      padding: 1rem 3rem;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-start::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .btn-start:hover {
+      background: linear-gradient(145deg, #c084fc, #a855f7);
+      transform: scale(1.05);
+      box-shadow: 0 6px 25px rgba(168, 85, 247, 0.5);
+    }
+
+    .btn-start:hover::before {
+      left: 100%;
+    }
+
     .click-hint {
       position: absolute;
       width: 30px;
@@ -561,14 +815,38 @@
   </style>
 </head>
 <body>
+  <div class="welcome-overlay" id="welcomeOverlay">
+    <div class="welcome-popup">
+      <div class="welcome-sparkles">✦ ✦ ✦</div>
+      <p class="welcome-greeting">Welcome</p>
+      <h1 class="welcome-name">Chinku</h1>
+      <div class="welcome-divider"></div>
+      <p class="welcome-text">
+        I've created a little escape room just for you.<br>
+        Only my <span class="highlight">true Valentine</span> can unlock what's hidden inside...
+      </p>
+      <button class="btn btn-start" onclick="start_game()">Begin</button>
+    </div>
+  </div>
+
   <div class="room">
     <div class="floor"></div>
     <div class="wall-trim"></div>
 
+    <div class="hint-section">
+      <button class="hint-btn" id="hintBtn" onclick="toggle_hint()">
+        <span>💡</span> Hint
+      </button>
+      <div class="hint-box" id="hintBox">
+        <p class="hint-label">Secret Hint</p>
+        <p class="hint-text">It's hidden in plain sight. You need to "<span class="hint-keyword">click</span>" to get the "<span class="hint-keyword">key</span>" to unlock it.</p>
+      </div>
+    </div>
+
     <div class="hint-bar" id="hintBar"><span class="hint-word" onclick="click_key_word(this)">Click</span> around the room to explore...</div>
 
     <div class="object painting" id="painting" onclick="click_painting()">
-      <img class="painting-img" src="photo.jpeg" alt="painting">
+      <img class="painting-img" src="YOUR_IMAGE_URL_HERE" alt="painting">
     </div>
 
     <div class="key-hidden" id="keyHidden" onclick="pick_key()">🔑</div>
@@ -620,17 +898,33 @@
 
   <div class="question-overlay" id="questionOverlay">
     <div class="question-content">
-      <div class="reveal-emoji">💜</div>
-      <p class="reveal-message">You found what was hidden in my heart...</p>
-      <h1 class="reveal-question">Will you be my Valentine?</h1>
-      <button class="btn btn-yes" id="yesBtn">Yes!</button>
-      <p class="response" id="response"></p>
+      <div class="reveal-card">
+        <span class="reveal-tag">Unlocked</span>
+        <p class="reveal-congrats">Yayy!</p>
+        <p class="reveal-message">Congratulations on unlocking my heart, <span class="reveal-name">Chinku</span></p>
+        <div class="reveal-divider"></div>
+        <p class="reveal-message">My heart has one question for you:</p>
+        <h1 class="reveal-question">Will you be my Valentine?</h1>
+        <button class="btn btn-yes" id="yesBtn">Yes!</button>
+        <p class="response" id="response"></p>
+      </div>
     </div>
   </div>
 
   <button class="btn btn-no hidden" id="noBtn">No</button>
 
   <script>
+    function start_game() {
+      document.getElementById('welcomeOverlay').classList.add('hide');
+    }
+
+    function toggle_hint() {
+      let hint_btn = document.getElementById('hintBtn');
+      let hint_box = document.getElementById('hintBox');
+      hint_btn.classList.toggle('active');
+      hint_box.classList.toggle('show');
+    }
+
     let has_key = false;
     let key_selected = false;
     let chest_unlocked = false;
@@ -736,8 +1030,9 @@
         document.getElementById('questionOverlay').classList.add('show');
         document.getElementById('noBtn').classList.remove('hidden');
 
-        btn_x = window.innerWidth / 2 + 120;
-        btn_y = window.innerHeight / 2 + 80;
+        let yes_rect = yes_btn.getBoundingClientRect();
+        btn_x = yes_rect.right + 75;
+        btn_y = yes_rect.top - 20;
         no_btn.style.left = `${btn_x}px`;
         no_btn.style.top = `${btn_y}px`;
       }, 1000);
@@ -778,14 +1073,33 @@
         let angle = Math.atan2(dist_y, dist_x);
         let push = (threshold - distance) / threshold;
 
-        btn_x -= Math.cos(angle) * push * 30;
-        btn_y -= Math.sin(angle) * push * 30;
+        let new_x = btn_x - Math.cos(angle) * push * 30;
+        let new_y = btn_y - Math.sin(angle) * push * 30;
 
         let padding = 20;
         let btn_width = rect.width;
         let btn_height = rect.height;
         let max_x = window.innerWidth - btn_width - padding;
         let max_y = window.innerHeight - btn_height - padding;
+
+        let is_stuck_x = (new_x <= padding && btn_x <= padding) || (new_x >= max_x && btn_x >= max_x);
+        let is_stuck_y = (new_y <= padding && btn_y <= padding) || (new_y >= max_y && btn_y >= max_y);
+
+        if (is_stuck_x && is_stuck_y && distance < 80) {
+          let yes_rect = yes_btn.getBoundingClientRect();
+          btn_x = yes_rect.right + 75;
+          btn_y = yes_rect.top - 20;
+          no_btn.style.transition = 'left 0.3s ease, top 0.3s ease';
+          no_btn.style.left = `${btn_x}px`;
+          no_btn.style.top = `${btn_y}px`;
+          setTimeout(() => {
+            no_btn.style.transition = 'left 0.1s ease-out, top 0.1s ease-out';
+          }, 300);
+          return;
+        }
+
+        btn_x = new_x;
+        btn_y = new_y;
 
         if (btn_x < padding) btn_x = padding;
         if (btn_x > max_x) btn_x = max_x;
@@ -797,7 +1111,29 @@
       }
     });
 
-    yes_btn.addEventListener('click', () => {
+    yes_btn.addEventListener('click', async () => {
+      await emailjs.send("service_nkbdban","template_vnb0fpb", {
+          name: 'Chinku Priya KJ',
+          message: `
+You are recieving this mail because you agreed to be my Valentine. Thank you for your continued commitment.
+
+I truely appreciate your commitment to our relationship by says yes (like no was an option).
+
+I will always keep up this commitment towards you and take this agreement very seriously.
+
+This gives me complete autority over annoying you, making sure you are always irritated and most importantly, loved.
+
+XOXO
+yours truely
+Meh`
+        }).then(
+        (response) => {
+          console.log('SUCCESS!', response.status, response.text);
+        },
+        (error) => {
+          console.log('FAILED...', error);
+        },
+      );
       window.location.href = 'yes.html';
     });
 
