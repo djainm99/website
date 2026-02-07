@@ -9,13 +9,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script type="text/javascript">
-  (function() {
-    emailjs.init({
-      publicKey: "Qd19h7HdPVzbXTJIJ",
-    });
-  })();
-</script>
-
+    (function() {
+      emailjs.init({
+        publicKey: "Qd19h7HdPVzbXTJIJ",
+      });
+    })();
+  </script>
   <style>
     * {
       margin: 0;
@@ -286,6 +285,271 @@
       height: 100%;
       object-fit: cover;
       border-radius: 2px;
+    }
+
+    .wall-clock {
+      top: 8%;
+      left: 42%;
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(145deg, #e8c39e, #d4a574);
+      border-radius: 50%;
+      border: 6px solid #8b5a2b;
+      box-shadow: 3px 3px 15px rgba(0,0,0,0.5);
+    }
+
+    .clock-face {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: #fef3e2;
+      border-radius: 50%;
+    }
+
+    .clock-hand {
+      position: absolute;
+      background: #2d1f47;
+      transform-origin: bottom center;
+      left: 50%;
+      bottom: 50%;
+    }
+
+    .clock-hand.hour {
+      width: 4px;
+      height: 18px;
+      margin-left: -2px;
+      transform: rotate(120deg);
+    }
+
+    .clock-hand.minute {
+      width: 2px;
+      height: 24px;
+      margin-left: -1px;
+      transform: rotate(45deg);
+    }
+
+    .clock-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 8px;
+      height: 8px;
+      background: #8b5a2b;
+      border-radius: 50%;
+    }
+
+    .safe {
+      top: 22%;
+      left: 5%;
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(145deg, #4a4a4a, #2d2d2d);
+      border: 4px solid #1a1a1a;
+      border-radius: 5px;
+      box-shadow: 3px 3px 15px rgba(0,0,0,0.6);
+    }
+
+    .safe-door {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .safe-dial {
+      width: 35px;
+      height: 35px;
+      background: linear-gradient(145deg, #d4a574, #b8956a);
+      border-radius: 50%;
+      border: 3px solid #8b5a2b;
+    }
+
+    .fireplace {
+      bottom: 35%;
+      right: 5%;
+      width: 140px;
+      height: 130px;
+    }
+
+    .fireplace-mantle {
+      position: absolute;
+      top: 0;
+      width: 140px;
+      height: 20px;
+      background: linear-gradient(90deg, #8b5a2b, #a06830, #8b5a2b);
+      border-radius: 3px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+    }
+
+    .fireplace-opening {
+      position: absolute;
+      bottom: 0;
+      left: 20px;
+      width: 100px;
+      height: 100px;
+      background: #1a1a1a;
+      border: 8px solid #6b4423;
+      border-bottom: none;
+      border-radius: 50% 50% 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .fire {
+      font-size: 2.5rem;
+      animation: fire-flicker 0.3s ease-in-out infinite alternate;
+    }
+
+    @keyframes fire-flicker {
+      from { transform: scale(1); filter: brightness(1); }
+      to { transform: scale(1.1); filter: brightness(1.2); }
+    }
+
+    .armchair {
+      bottom: 20%;
+      right: 22%;
+      width: 90px;
+      height: 100px;
+    }
+
+    .chair-back {
+      position: absolute;
+      top: 0;
+      left: 10px;
+      width: 70px;
+      height: 60px;
+      background: linear-gradient(145deg, #881337, #6b102c);
+      border-radius: 10px 10px 0 0;
+      box-shadow: inset 0 -10px 20px rgba(0,0,0,0.3);
+    }
+
+    .chair-seat {
+      position: absolute;
+      bottom: 20px;
+      left: 5px;
+      width: 80px;
+      height: 30px;
+      background: linear-gradient(145deg, #a01641, #881337);
+      border-radius: 5px;
+    }
+
+    .chair-arm {
+      position: absolute;
+      bottom: 20px;
+      width: 15px;
+      height: 50px;
+      background: linear-gradient(145deg, #6b4423, #5a3a1d);
+      border-radius: 5px;
+    }
+
+    .chair-arm.left { left: 0; }
+    .chair-arm.right { right: 0; }
+
+    .cabinet {
+      bottom: 35%;
+      left: 32%;
+      width: 100px;
+      height: 90px;
+      background: linear-gradient(145deg, #6b4423, #5a3a1d);
+      border: 4px solid #8b5a2b;
+      border-radius: 5px;
+      box-shadow: 3px 3px 15px rgba(0,0,0,0.5);
+    }
+
+    .cabinet-door.left { left: 5px; }
+    .cabinet-door.right { right: 5px; }
+
+    .cabinet-knob {
+      position: absolute;
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      background: #d4a574;
+      border-radius: 50%;
+    }
+
+    .cabinet-knob.left { left: 40px; }
+    .cabinet-knob.right { right: 40px; }
+
+    .cabinet.open .cabinet-door.left {
+      transform: rotateY(-110deg);
+      transform-origin: left;
+    }
+
+    .cabinet.open .cabinet-door.right {
+      transform: rotateY(110deg);
+      transform-origin: right;
+    }
+
+    .cabinet-inside {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      background: #3d2a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.3);
+      z-index: -1;
+    }
+
+    .cabinet-door {
+      position: absolute;
+      top: 5px;
+      width: 42px;
+      height: 76px;
+      background: linear-gradient(145deg, #7a4f25, #6b4423);
+      border: 2px solid #8b5a2b;
+      transition: transform 0.5s ease;
+    }
+
+    .globe {
+      bottom: calc(15% + 115px);
+      left: calc(50% - 100px);
+      width: 40px;
+      height: 55px;
+    }
+
+    .globe-sphere {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(145deg, #3b82f6, #1d4ed8, #22c55e);
+      border-radius: 50%;
+      border: 2px solid #d4a574;
+    }
+
+    .globe-stand {
+      width: 20px;
+      height: 15px;
+      background: #8b5a2b;
+      margin: 0 auto;
+      clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+    }
+
+    .letter {
+      bottom: calc(15% + 110px);
+      left: calc(50% + 60px);
+      font-size: 1.8rem;
+      filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.4));
+      animation: letter-hover 2s ease-in-out infinite;
+    }
+
+    @keyframes letter-hover {
+      0%, 100% { transform: rotate(-5deg); }
+      50% { transform: rotate(5deg); }
+    }
+
+    .telephone {
+      top: 25%;
+      right: 42%;
+      font-size: 2rem;
+      filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.5));
     }
 
     .window {
@@ -846,8 +1110,53 @@
     <div class="hint-bar" id="hintBar"><span class="hint-word" onclick="click_key_word(this)">Click</span> around the room to explore...</div>
 
     <div class="object painting" id="painting" onclick="click_painting()">
-      <img class="painting-img" src="photo.jpeg" alt="painting">
+      <img class="painting-img" src="YOUR_IMAGE_URL_HERE" alt="painting">
     </div>
+
+    <div class="object wall-clock" onclick="click_clock()">
+      <div class="clock-face">
+        <div class="clock-hand hour"></div>
+        <div class="clock-hand minute"></div>
+        <div class="clock-center"></div>
+      </div>
+    </div>
+
+    <div class="object safe" onclick="click_safe()">
+      <div class="safe-door">
+        <div class="safe-dial"></div>
+      </div>
+    </div>
+
+    <div class="object fireplace">
+      <div class="fireplace-mantle"></div>
+      <div class="fireplace-opening">
+        <div class="fire">🔥</div>
+      </div>
+    </div>
+
+    <div class="object armchair" onclick="click_armchair()">
+      <div class="chair-back"></div>
+      <div class="chair-seat"></div>
+      <div class="chair-arm left"></div>
+      <div class="chair-arm right"></div>
+    </div>
+
+    <div class="object cabinet" id="cabinet" onclick="click_cabinet()">
+      <div class="cabinet-inside">empty</div>
+      <div class="cabinet-door left"></div>
+      <div class="cabinet-door right"></div>
+      <div class="cabinet-knob left"></div>
+      <div class="cabinet-knob right"></div>
+    </div>
+
+    <div class="object globe" onclick="click_globe()">
+      <div class="globe-sphere"></div>
+      <div class="globe-stand"></div>
+    </div>
+
+    <div class="object letter" onclick="click_letter()">📜</div>
+
+    <div class="object telephone" onclick="click_telephone()">📞</div>
 
     <div class="key-hidden" id="keyHidden" onclick="pick_key()">🔑</div>
 
@@ -903,7 +1212,6 @@
         <p class="reveal-congrats">Yayy!</p>
         <p class="reveal-message">Congratulations on unlocking my heart, <span class="reveal-name">Chinku</span></p>
         <div class="reveal-divider"></div>
-        <p class="reveal-message">My heart has one question for you:</p>
         <h1 class="reveal-question">Will you be my Valentine?</h1>
         <button class="btn btn-yes" id="yesBtn">Yes!</button>
         <p class="response" id="response"></p>
@@ -1047,7 +1355,44 @@
     }
 
     function click_bookshelf() {
-      show_message('Old books... nothing useful. 📚');
+      show_message('Old dusty books... nothing useful. 📚');
+    }
+
+    function click_clock() {
+      show_message('The clock reads 2:14... Valentine\'s Day! ❤️');
+    }
+
+    function click_safe() {
+      show_message('A safe, but not part of the puzzle. 🔐');
+    }
+
+    function click_armchair() {
+      show_message('A comfy armchair. Nothing hidden in the cushions. 🛋️');
+    }
+
+    let cabinet_open = false;
+
+    function click_cabinet() {
+      let cabinet = document.getElementById('cabinet');
+      if (!cabinet_open) {
+        cabinet_open = true;
+        cabinet.classList.add('open');
+        show_message('Nothing inside... just dust. 🕸️');
+      } else {
+        show_message('Still empty. Keep looking elsewhere!');
+      }
+    }
+
+    function click_globe() {
+      show_message('A spinning globe. Where will love take you? 🌍');
+    }
+
+    function click_letter() {
+      show_message('An old love letter... how romantic! 💌');
+    }
+
+    function click_telephone() {
+      show_message('The phone is disconnected. No help coming! ☎️');
     }
 
     let no_btn = document.getElementById('noBtn');
@@ -1111,7 +1456,7 @@
       }
     });
 
-    yes_btn.addEventListener('click', async () => {
+        yes_btn.addEventListener('click', async () => {
       await emailjs.send("service_nkbdban","template_vnb0fpb", {
           name: 'Chinku Priya KJ',
           message: `
